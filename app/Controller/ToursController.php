@@ -6,6 +6,12 @@ App::uses('AppController', 'Controller');
  * @property Tour $Tour
  */
 class ToursController extends AppController {
+  
+  public function beforeFilter() {
+    if (!empty($this->request->params['pass'])) {
+      $this->set('tid', $this->request->params['pass'][0]);
+    }
+  } 
 
 /**
  * index method

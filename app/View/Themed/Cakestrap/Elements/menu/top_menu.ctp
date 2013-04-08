@@ -10,7 +10,8 @@
 			<h1><?php echo $this->Html->link('Tour Assistant', array('controller' => 'pages', 'action' => 'display', 'index')); ?></h1>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<?php //Fill me with your sweet, sweet menu items. ?>
+					<li><?php echo $this->Html->link(__('My tours'), array('controller' => 'tours', 'action' => 'index')); ?> </li>
+					<li><?php echo $this->Html->link(__('My members'), array('controller' => 'members', 'action' => 'index')); ?> </li>
 				</ul>
 			</div>
 		</div>

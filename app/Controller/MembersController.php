@@ -7,12 +7,19 @@ App::uses('AppController', 'Controller');
  */
 class MembersController extends AppController {
 
+	public function all() {
+		$this->Member->recursive = 0;
+		$this->set('members', $this->paginate());
+	}
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+	  if (empty($this->request->params['tid'])) {
+	    $this->redirect(array('action' => 'all'));
+	  }
 		$this->Member->recursive = 0;
 		$this->set('members', $this->paginate());
 	}
@@ -60,7 +67,6 @@ class MembersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-	  print_r($this->request->data);exit;
 		if (!$this->Member->exists($id)) {
 			throw new NotFoundException(__('Invalid member'));
 		}
@@ -91,15 +97,25 @@ class MembersController extends AppController {
  */
 	public function delete($id = null) {
 		$this->Member->id = $id;
+		$redirect_path = array('action' => 'index');
+		
 		if (!$this->Member->exists()) {
 			throw new NotFoundException(__('Invalid member'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Member->delete()) {
 			$this->Session->setFlash(__('Member deleted'));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect($redirect_path);
 		}
 		$this->Session->setFlash(__('Member was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		$this->redirect($redirect_path);
+	}
+	
+	public function getRedirectPath($url) {
+	  if (!empty($this->request->data['tour_id'])) {
+	    return CoreUtils::getTourUrl($this->request->data['tour_id'], $url);
+	  }else {
+	    return array($url);
+	  }
 	}
 }

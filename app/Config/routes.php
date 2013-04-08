@@ -31,6 +31,18 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	
+	/*App routers*/
+	//Router::connect('/tours/view/:tid', array('controller' => 'tours', 'action' => 'view'));
+	
+	Router::connect('/tours/view/:tid/members', array('controller' => 'members'));
+	Router::connect('/tours/view/:tid/members/:action/*', array('controller' => 'members'));
+	
+	Router::connect('/tours/view/:tid/costs', array('controller' => 'costs'));
+	Router::connect('/tours/view/:tid/costs/:action/*', array('controller' => 'costs'));
+	
+	Router::connect('/tours/view/:tid/deposits', array('controller' => 'deposits'));
+	Router::connect('/tours/view/:tid/deposits/:action/*', array('controller' => 'deposits'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

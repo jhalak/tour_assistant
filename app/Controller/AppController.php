@@ -21,7 +21,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 App::uses('Controller', 'Controller');
-
+App::import('Vendor', 'Utils/CoreUtils');
 /**
  * Application Controller
  *
@@ -33,4 +33,20 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
   public $theme = "Cakestrap";
+  
+  public function beforeFilter(){
+    if (!empty($this->request->params['tid'])) {
+      $this->set('tid', $this->request->params['tid']);
+    }
+  }
+  
+  public function redirect($url) {
+    if (!empty($this->request->params['tid'])) {
+      $url = CoreUtils::getTourUrl($this->request->params['tid'], $url);
+    }
+    if (!empty($this->request->data['tour_id'])) {
+      $url = CoreUtils::getTourUrl($this->request->data['tour_id'], $url);
+    }
+    parent::redirect($url);
+  }
 }

@@ -54,17 +54,49 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			</div><!-- #header .container -->
 			
 			<div id="content" class="container">
+  			<div id="page-container" class="row-fluid">
+  
+  				<div id="sidebar" class="span3">
+  
+  					<div class="actions">
+  
+  						<ul class="nav nav-list bs-docs-sidenav">
+  							<?php echo $this->element('leftnav'); ?>
+  						</ul>
+  						<!-- .nav nav-list bs-docs-sidenav -->
+  
+  					</div>
+  					<!-- .actions -->
+  
+  				</div><!-- #sidebar .span3 -->
+  
+  					<div id="page-content" class="span9">
+					
+					
+					
+				      <?php echo $this->Session->flash(); ?>
+					
+					
 
-				<?php echo $this->Session->flash(); ?>
+				      <?php echo $this->fetch('content'); ?>
+						</div><!-- #page-content .span9 -->
 
-				<?php echo $this->fetch('content'); ?>
-			</div><!-- #header .container -->
-			
-			<div id="footer" class="container">
+				</div><!-- #page-container .row-fluid -->
+					
+
+
+				</div>
+				<!-- #header .container -->
+
+				<div id="footer" class="container">
+					
+					
 				<?php //Silence is golden ?>
-			</div><!-- #footer .container -->
-			
-		</div><!-- #main-container -->
+				</div>
+				<!-- #footer .container -->
+
+			</div>
+			<!-- #main-container -->
 		
 		<div class="container">
 			<div class="well">
