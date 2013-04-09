@@ -58,9 +58,9 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
   
   				<div id="sidebar" class="span3">
   
-  					<div class="actions">
+  					<div class="actions well">
   
-  						<ul class="nav nav-list bs-docs-sidenav">
+  						<ul class="nav nav-list">
   							<?php echo $this->element('leftnav'); ?>
   						</ul>
   						<!-- .nav nav-list bs-docs-sidenav -->
@@ -71,13 +71,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
   				</div><!-- #sidebar .span3 -->
   
   					<div id="page-content" class="span9">
-					
-					
-					
-				      <?php echo $this->Session->flash(); ?>
-					
-					
-
+					    <?php echo $this->Session->flash(); ?>
 				      <?php echo $this->fetch('content'); ?>
 						</div><!-- #page-content .span9 -->
 
@@ -97,15 +91,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 			</div>
 			<!-- #main-container -->
-		
-		<div class="container">
-			<div class="well">
-				<small>
-					<?php echo $this->element('sql_dump'); ?>
-				</small>
-			</div>
-		</div><!-- .container -->
-		
+			<div class="container">
+                       <div class="well">
+                               <small>
+                                       <?php echo $this->element('sql_dump'); ?>
+                               </small>
+                      </div>
+          </div><!-- .container -->
+			
 	</body>
 
 </html>

@@ -51,5 +51,15 @@ class User extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
+  
+	public function beforeFind($queryData) {
+	  if (!$this->isAdmin()) {
+  	  $queryData['conditions'][] = array('User.id' => $this->loggedInUid);
+	  }
+	  return $queryData;
+	}
+	
+	public function isAdmin() {
+	  return false;
+	}
 }

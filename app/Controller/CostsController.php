@@ -6,15 +6,22 @@ App::uses('AppController', 'Controller');
  * @property Cost $Cost
  */
 class CostsController extends AppController {
-
+  
+  public function beforeFilter(){
+    parent::assertTourExists();
+  }
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
-		$this->Cost->recursive = 0;
-		$this->set('costs', $this->paginate());
+		$this->paginate = array(
+		  'conditions' => array('Cost.tour_id' => $this->request->params['tid']),
+			'recursive' => 0,
+		);
+		$costs = $this->paginate('Cost'); 
+		$this->set('costs', $costs);
 	}
 
 /**

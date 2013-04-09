@@ -36,7 +36,14 @@ class AppController extends Controller {
   
   public function beforeFilter(){
     if (!empty($this->request->params['tid'])) {
-      $this->set('tid', $this->request->params['tid']);
+      $tid = $this->request->params['tid'];
+      
+      $this->loadModel('Tour');
+      $options = array('conditions' => array('Tour.' . $this->Tour->primaryKey => $tid));
+      $tour = $this->Tour->find('first', $options);
+      
+      $this->set('tid', $tid);
+      $this->set('tour', $tour);
     }
   }
   
@@ -48,5 +55,14 @@ class AppController extends Controller {
       $url = CoreUtils::getTourUrl($this->request->data['tour_id'], $url);
     }
     parent::redirect($url);
+  }
+  
+  public function assertTourExists() {
+  if (empty($this->request->params['tid'])) {
+      $this->Session->setFlash(__('Please select a tour'));
+      $this->redirect('/tours');
+    }else {
+      self::beforeFilter();
+    }
   }
 }

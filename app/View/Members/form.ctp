@@ -12,19 +12,19 @@
 		</div>
 		<!-- .control-group -->
 
-		<div class="control-group">
-		<?php echo $this->Form->label('user_id', 'user_id', array('class' => 'control-label'));?>
+		<div class="control-group hidden">
+		<?php echo $this->Form->label('User', 'user_id', array('class' => 'control-label'));?>
 			<div class="controls">
 			<?php echo $this->Form->input('user_id', array('class' => 'span12')); ?>
 			</div>
 			<!-- .controls -->
 		</div>
 		<!-- .control-group -->
-		<?php // echo $this->Form->input('tour_id', array('type' => 'hidden', 'value' => $tid)); ?>
-		<div class="control-group">
+		
+		<div class="control-group hidden">
 		<?php echo $this->Form->label('Tour', 'Tour', array('class' => 'control-label'));?>
 			<div class="controls">
-			<?php echo $this->Form->input('Tour');?>
+			<?php echo $this->Form->input('Tour', array('default' => $tid));?>
 			</div>
 			<!-- .controls -->
 		</div>

@@ -22,7 +22,7 @@
 		<!-- .control-group -->
 
 		<div class="control-group">
-		<?php echo $this->Form->label('user_id', 'user_id', array('class' => 'control-label'));?>
+		<?php echo $this->Form->label('user_id', 'User', array('class' => 'control-label'));?>
 			<div class="controls">
 			<?php echo $this->Form->input('user_id', array('class' => 'span12')); ?>
 			</div>

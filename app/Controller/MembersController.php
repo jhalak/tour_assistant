@@ -20,8 +20,23 @@ class MembersController extends AppController {
 	  if (empty($this->request->params['tid'])) {
 	    $this->redirect(array('action' => 'all'));
 	  }
-		$this->Member->recursive = 0;
-		$this->set('members', $this->paginate());
+	  
+		$this->paginate = array(
+			'joins' => array(
+		    array(
+		  		'table' => 'members_tours',
+		    	'alias' => 'MembersTours',
+		    	'type' => 'INNER',
+		    	'conditions' => array(
+		    		'MembersTours.member_id = Member.id'
+		      )
+		    )
+		  ),
+			'conditions' => array('MembersTours.tour_id' => $this->request->params['tid']),
+			'recursive' => 0,
+		);
+		$members = $this->paginate('Member');
+		$this->set('members', $members);
 	}
 
 /**

@@ -55,5 +55,10 @@ class Tour extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+	public function beforeFind($queryData) {
+	  $queryData['conditions'][] = array('Tour.user_id' => $this->loggedInUid);
+	  return $queryData;
+	}
 
 }

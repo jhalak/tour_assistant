@@ -61,5 +61,10 @@ class Member extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+	public function beforeFind($queryData) {
+	  $queryData['conditions'][] = array('Member.user_id' => $this->loggedInUid);
+	  return $queryData;
+	}
 
 }

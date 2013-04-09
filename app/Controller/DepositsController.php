@@ -6,15 +6,22 @@ App::uses('AppController', 'Controller');
  * @property Deposit $Deposit
  */
 class DepositsController extends AppController {
-
+  
+  public function beforeFilter(){
+    parent::assertTourExists();
+  }
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
-		$this->Deposit->recursive = 0;
-		$this->set('deposits', $this->paginate());
+		$this->paginate = array(
+  	  'conditions' => array('Deposit.tour_id' => $this->request->params['tid']),
+  		'recursive' => 0,
+		);
+		$deposits = $this->paginate('Deposit');
+		$this->set('deposits', $deposits);
 	}
 
 /**
@@ -48,7 +55,19 @@ class DepositsController extends AppController {
 			}
 		}
 		$tours = $this->Deposit->Tour->find('list');
-		$members = $this->Deposit->Member->find('list');
+		$members = $this->Deposit->Member->find('list', array(
+		'joins' => array(
+  	  array(
+  		  'table' => 'members_tours',
+  			'alias' => 'MembersTours',
+  			'type' => 'INNER',
+  			'conditions' => array(
+  				'MembersTours.member_id = Member.id'
+		    )
+		  )
+  	),
+		'conditions' => array('MembersTours.tour_id' => $this->request->params['tid'])
+		));
 		$this->set(compact('tours', 'members'));
 	}
 

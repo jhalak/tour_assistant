@@ -21,10 +21,10 @@
 		</div>
 		<!-- .control-group -->
 
-		<div class="control-group">
+		<div class="control-group hidden">
 		<?php echo $this->Form->label('tour_id', 'tour_id', array('class' => 'control-label'));?>
 			<div class="controls">
-			<?php echo $this->Form->input('tour_id', array('class' => 'span12')); ?>
+			<?php echo $this->Form->input('tour_id', array('default' => $tid, 'class' => 'span12')); ?>
 			</div>
 			<!-- .controls -->
 		</div>
