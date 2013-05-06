@@ -48,30 +48,33 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<body>
 
 		<div id="main-container">
-		
+
 			<div id="header" class="container">
 				<?php echo $this->element('menu/top_menu'); ?>
 			</div><!-- #header .container -->
-			
+
 			<div id="content" class="container">
   			<div id="page-container" class="row-fluid">
-  
+
   				<div id="sidebar" class="span3">
-  
+            <?php if ($auth->loggedIn()):?>
   					<div class="actions well">
-  
   						<ul class="nav nav-list">
   							<?php echo $this->element('leftnav'); ?>
   						</ul>
   						<!-- .nav nav-list bs-docs-sidenav -->
-  
+            <?php endif;?>
   					</div>
   					<!-- .actions -->
   
   				</div><!-- #sidebar .span3 -->
   
   					<div id="page-content" class="span9">
-					    <?php echo $this->Session->flash(); ?>
+              <?php if (CakeSession::check('Message.')): ?>
+                <div class="alert">
+					        <?php echo $this->Session->flash(); ?>
+                </div>
+					    <?php endif;?>
 				      <?php echo $this->fetch('content'); ?>
 						</div><!-- #page-content .span9 -->
 

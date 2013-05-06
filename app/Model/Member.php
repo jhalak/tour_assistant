@@ -63,7 +63,7 @@ class Member extends AppModel {
 	);
 	
 	public function beforeFind($queryData) {
-	  $queryData['conditions'][] = array('Member.user_id' => $this->loggedInUid);
+	  $queryData['conditions'][] = array('Member.user_id' => $this->getLoggedInUid());
 	  return $queryData;
 	}
 

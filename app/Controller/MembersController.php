@@ -72,6 +72,7 @@ class MembersController extends AppController {
 		$users = $this->Member->User->find('list');
 		$tours = $this->Member->Tour->find('list');
 		$this->set(compact('users', 'tours'));
+    $this->set('loggedInUid', $this->Member->getLoggedInUid());
 	}
 
 /**

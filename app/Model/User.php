@@ -1,8 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
+
 /**
  * User Model
  *
+ * @property Group $Group
  * @property Member $Member
  * @property Tour $Tour
  */
@@ -15,8 +18,80 @@ class User extends AppModel {
  */
 	public $displayField = 'name';
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+	public $validate = array(
+		'name' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'email' => array(
+			'email' => array(
+				'rule' => array('email'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'username' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'password' => array(
+			'minlength' => array(
+				'rule' => array('minlength', 6),
+				'message' => 'Password should be at least 6 character',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'group_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Group' => array(
+			'className' => 'Group',
+			'foreignKey' => 'group_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
 /**
  * hasMany associations
@@ -51,15 +126,15 @@ class User extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-  
-	public function beforeFind($queryData) {
-	  if (!$this->isAdmin()) {
-  	  $queryData['conditions'][] = array('User.id' => $this->loggedInUid);
-	  }
-	  return $queryData;
-	}
-	
-	public function isAdmin() {
-	  return false;
-	}
+
+  public function beforeSave($options = array()){
+    if (!empty($this->data['User']['password'])) {
+      $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+    }
+    return true;
+  }
+
+  public function beforeFind($queryData){
+    return $queryData;
+  }
 }

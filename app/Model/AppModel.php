@@ -22,6 +22,7 @@
  */
 
 App::uses('Model', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
 
 /**
  * Application model for Cake.
@@ -32,5 +33,21 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
-  public $loggedInUid = 1;
+  const ADMIN_GID = 1;
+  public function getAdminGid() {
+    return self::ADMIN_GID;
+  }
+  public function getLoggedInUid() {
+    $user = AuthComponent::user();
+    //CoreUtils::dumpAndExit($user);
+    if (!empty($user['id'])) {
+      return $user['id'];
+    }
+    return 1;
+  }
+
+  public function isAdmin(){
+    $user = AuthComponent::user();
+    return $user['Group']['id'] == $this->getAdminGid();
+  }
 }

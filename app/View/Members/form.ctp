@@ -15,7 +15,7 @@
 		<div class="control-group hidden">
 		<?php echo $this->Form->label('User', 'user_id', array('class' => 'control-label'));?>
 			<div class="controls">
-			<?php echo $this->Form->input('user_id', array('class' => 'span12')); ?>
+			<?php echo $this->Form->input('user_id', array('class' => 'span12', 'default' => $loggedInUid)); ?>
 			</div>
 			<!-- .controls -->
 		</div>

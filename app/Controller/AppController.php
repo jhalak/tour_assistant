@@ -33,8 +33,17 @@ App::import('Vendor', 'Utils/CoreUtils');
  */
 class AppController extends Controller {
   public $theme = "Cakestrap";
-  
+
+  public $components = array(
+    'Session',
+    'Auth' => array(
+      'loginRedirect' => array('controller' => 'tours', 'action' => 'index'),
+      'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+    ),
+  );
+
   public function beforeFilter(){
+    $this->Auth->allow('index', 'view');
     if (!empty($this->request->params['tid'])) {
       $tid = $this->request->params['tid'];
       
@@ -45,6 +54,7 @@ class AppController extends Controller {
       $this->set('tid', $tid);
       $this->set('tour', $tour);
     }
+    $this->set('auth', $this->Auth);
   }
   
   public function redirect($url) {

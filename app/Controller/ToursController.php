@@ -8,6 +8,7 @@ App::uses('AppController', 'Controller');
 class ToursController extends AppController {
   
   public function beforeFilter() {
+    parent::beforeFilter();
     if (!empty($this->request->params['pass'])) {
       $this->set('tid', $this->request->params['pass'][0]);
     }
@@ -56,6 +57,7 @@ class ToursController extends AppController {
 		$users = $this->Tour->User->find('list');
 		$members = $this->Tour->Member->find('list');
 		$this->set(compact('users', 'members'));
+    $this->set('loggedInUid', $this->Tour->getLoggedInUid());
 	}
 
 /**

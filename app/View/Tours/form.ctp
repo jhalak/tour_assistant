@@ -21,10 +21,10 @@
 		</div>
 		<!-- .control-group -->
 
-		<div class="control-group">
+		<div class="control-group hidden">
 		<?php echo $this->Form->label('user_id', 'User', array('class' => 'control-label'));?>
 			<div class="controls">
-			<?php echo $this->Form->input('user_id', array('class' => 'span12')); ?>
+			<?php echo $this->Form->input('user_id', array('class' => 'span12', 'default' => $loggedInUid)); ?>
 			</div>
 			<!-- .controls -->
 		</div>
