@@ -14,8 +14,11 @@
       <!-- .controls -->
     </div>
     <!-- .control-group -->
+    <?php if ($action != 'edit'):?>
 
-    <div class="control-group">
+    <?php endif; ?>
+    <?php $class = $action == 'edit' ? 'hidden' : ''; ?>
+    <div class="control-group <?php echo $class; ?>">
       <?php echo $this->Form->label('email', 'email', array('class' => 'control-label'));?>
       <div class="controls">
         <?php echo $this->Form->input('email', array('class' => '')); ?>
@@ -24,7 +27,7 @@
     </div>
     <!-- .control-group -->
 
-    <div class="control-group">
+    <div class="control-group <?php echo $class; ?>">
       <?php echo $this->Form->label('username', 'username', array('class' => 'control-label'));?>
       <div class="controls">
         <?php echo $this->Form->input('username', array('class' => '')); ?>
@@ -33,10 +36,11 @@
     </div>
     <!-- .control-group -->
 
+
     <div class="control-group">
       <?php echo $this->Form->label('password', 'password', array('class' => 'control-label'));?>
       <div class="controls">
-        <?php echo $this->Form->input('password', array('class' => '')); ?>
+        <?php echo $this->Form->input('password', array('value' => '', 'class' => '')); ?>
       </div>
       <!-- .controls -->
     </div>

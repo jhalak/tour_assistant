@@ -43,6 +43,11 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+      'validateUnique' => array(
+        'rule' => array('validateUnique', 'email'),
+        'message' => 'Email already taken.',
+        'on' => 'create',
+      ),
 		),
 		'username' => array(
 			'notempty' => array(
@@ -53,6 +58,11 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+      'validateUnique' => array(
+        'rule' => array('validateUnique', 'username'),
+        'message' => 'Username already taken. Chose another',
+        'on' => 'create',
+      ),
 		),
 		'password' => array(
 			'minlength' => array(
@@ -136,5 +146,12 @@ class User extends AppModel {
 
   public function beforeFind($queryData){
     return $queryData;
+  }
+
+  public function validateUnique($value, $field) {
+    $count = $this->find('count', array(
+      'conditions' => array($field => $value[$field]),
+    ));
+    return $count == 0;
   }
 }

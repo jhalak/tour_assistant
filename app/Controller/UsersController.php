@@ -19,7 +19,7 @@ class UsersController extends AppController {
         //CoreUtils::dumpAndExit($this->Auth->redirectUrl());
         $this->redirect($this->Auth->redirectUrl());
       }else {
-        $this->Session->setFlash(__('Invalid username or password'));
+        $this->Session->setFlash(__('Invalid username or password'), 'flash/error');
       }
     }
   }
@@ -98,6 +98,7 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->find('first', $options);
 		}
 		$groups = $this->User->Group->find('list');
+    $this->set('action', 'edit');
 		$this->set(compact('groups'));
 	}
 

@@ -32,13 +32,6 @@
       </td>
     </tr>
     <tr>
-      <td><strong><?php echo __('Password'); ?></strong></td>
-      <td>
-        <?php echo h($user['User']['password']); ?>
-        &nbsp;
-      </td>
-    </tr>
-    <tr>
       <td><strong><?php echo __('Group'); ?></strong></td>
       <td>
         <?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id']), array('class' => '')); ?>
@@ -73,18 +66,14 @@
 
     <table class="table table-striped table-bordered">
       <tr>
-        <th><?php echo __('Id'); ?></th>
         <th><?php echo __('Name'); ?></th>
-        <th><?php echo __('User Id'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
       </tr>
       <?php
       $i = 0;
       foreach ($user['Member'] as $member): ?>
         <tr>
-          <td><?php echo $member['id']; ?></td>
           <td><?php echo $member['name']; ?></td>
-          <td><?php echo $member['user_id']; ?></td>
           <td class="actions">
             <?php echo $this->Html->link(__('View'), array('controller' => 'members', 'action' => 'view', $member['id']), array('class' => 'btn btn-mini')); ?>
             <?php echo $this->Html->link(__('Edit'), array('controller' => 'members', 'action' => 'edit', $member['id']), array('class' => 'btn btn-mini')); ?>
@@ -112,20 +101,14 @@
 
     <table class="table table-striped table-bordered">
       <tr>
-        <th><?php echo __('Id'); ?></th>
         <th><?php echo __('Name'); ?></th>
-        <th><?php echo __('Description'); ?></th>
-        <th><?php echo __('User Id'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
       </tr>
       <?php
       $i = 0;
       foreach ($user['Tour'] as $tour): ?>
         <tr>
-          <td><?php echo $tour['id']; ?></td>
           <td><?php echo $tour['name']; ?></td>
-          <td><?php echo $tour['description']; ?></td>
-          <td><?php echo $tour['user_id']; ?></td>
           <td class="actions">
             <?php echo $this->Html->link(__('View'), array('controller' => 'tours', 'action' => 'view', $tour['id']), array('class' => 'btn btn-mini')); ?>
             <?php echo $this->Html->link(__('Edit'), array('controller' => 'tours', 'action' => 'edit', $tour['id']), array('class' => 'btn btn-mini')); ?>
