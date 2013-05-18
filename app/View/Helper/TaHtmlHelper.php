@@ -39,4 +39,18 @@ class TaHtmlHelper extends HtmlHelper {
     $link .= '</div><br /><br />';
     return $link;
   }
+
+  public function themeLabelValue($label, $value) {
+    return '<span class="label label-inverse">' . __($label) . '</span> : ' .
+      '<span class="badge badge-info">' . $value . '</span>';
+  }
+
+  public function themeBalance($value) {
+    if ($value < 0) {
+      return '<span class="badge badge-important">-</span> ' .
+        '<span class="badge badge-info">' . (number_format(abs($value), 2)) . '</span>';
+    }
+    return '<span class="badge badge-success">+</span> ' .
+        '<span class="badge badge-info">' . (number_format($value, 2)) . '</span>';
+  }
 }

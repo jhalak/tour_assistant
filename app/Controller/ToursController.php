@@ -108,4 +108,40 @@ class ToursController extends AppController {
 		$this->Session->setFlash(__('Tour was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
+  public function summary(){
+    $tid = $this->params['tid'];
+
+    $this->loadModel('Cost');
+    $costs = $this->Cost->find('first', array(
+      'conditions' => array('Cost.tour_id' => $tid),
+      'fields' => array('SUM(Cost.amount) AS total'),
+    ));
+
+    $this->loadModel('Deposit');
+    $total_deposit = $this->Deposit->find('first', array(
+      'conditions' => array('Deposit.tour_id' => $tid),
+      'fields' => array('SUM(Deposit.amount) AS total'),
+    ));
+
+    $deposits = $this->Deposit->find('all', array(
+      'fields' => array('*', 'SUM(Deposit.amount) AS amount'),
+      'conditions' => array('Deposit.tour_id' => $tid),
+      'group' => array('Deposit.member_id'),
+    ));
+
+    $tour = $this->Tour->findById($tid);
+    $totalMember = count($tour['Member']);
+    $totalCost = $costs[0]['total'];
+    $perHeadCost = $totalCost / $totalMember;
+
+
+    $this->set('tour', $tour);
+    $this->set('total_member', $totalMember);
+    $this->set('total_cost', $totalCost);
+    $this->set('per_head_cost', $perHeadCost);
+    $this->set('total_deposit', $total_deposit[0]['total']);
+    $this->set('members', $tour['Member']);
+    $this->set('deposits', $deposits);
+  }
 }

@@ -44,6 +44,8 @@
 	Router::connect('/tours/view/:tid/deposits', array('controller' => 'deposits'));
 	Router::connect('/tours/view/:tid/deposits/:action/*', array('controller' => 'deposits'));
 
+  Router::connect('/tours/view/:tid/tours/summary', array('controller' => 'tours', 'action' => 'summary'));
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
