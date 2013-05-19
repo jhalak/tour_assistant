@@ -1,6 +1,3 @@
-<?php
-//  CoreUtils::dumpAndExit($deposits);
- ?>
 <div class="summary">
   <h1><?php echo __('Summary'); ?></h1>
   <dl>
@@ -20,11 +17,12 @@
     </thead>
     <tbody>
     <?php foreach($deposits as $deposit): ?>
+    <?php $amount = !empty($deposit[0]['amount']) ? $deposit[0]['amount'] : 0;?>
     <tr>
-      <td><?php echo $deposit['Member']['name']; ?></td>
-      <td><?php echo $deposit[0]['amount'];?></td>
-      <td><?php echo $deposit[0]['amount'] . ' - ' . $per_head_cost;?></td>
-      <td><?php echo $this->TaHtml->themeBalance($deposit[0]['amount'] - $per_head_cost); ?></td>
+      <td><?php echo $deposit['member']['name']; ?></td>
+      <td><?php echo $amount;?></td>
+      <td><?php echo $amount . ' - ' . $per_head_cost;?></td>
+      <td><?php echo $this->TaHtml->themeBalance($amount - $per_head_cost); ?></td>
     </tr>
     <?php endforeach; ?>
     </tbody>

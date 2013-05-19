@@ -61,4 +61,16 @@ class Tour extends AppModel {
 	  return $queryData;
 	}
 
+  public function getAllMembers($tid) {
+    $res = $this->query(
+      '
+        SELECT member.name, SUM(d.amount) AS amount FROM members_tours mt
+        INNER JOIN members member ON member.id = mt.member_id
+        LEFT JOIN deposits d ON d.member_id = mt.member_id
+        WHERE mt.tour_id = ' . $tid . '
+        GROUP BY mt.id
+      '
+    );
+    return $res;
+  }
 }

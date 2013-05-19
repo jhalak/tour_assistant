@@ -128,17 +128,12 @@ class ToursController extends AppController {
       'fields' => array('SUM(Deposit.amount) AS total'),
     ));
 
-    $deposits = $this->Deposit->find('all', array(
-      'fields' => array('*', 'SUM(Deposit.amount) AS amount'),
-      'conditions' => array('Deposit.tour_id' => $tid),
-      'group' => array('Deposit.member_id'),
-    ));
-
     $tour = $this->Tour->findById($tid);
     $totalMember = count($tour['Member']);
     $totalCost = $costs[0]['total'];
     $perHeadCost = $totalCost / $totalMember;
 
+    $deposits = $this->Tour->getAllMembers($tid);
 
     $this->set('tour', $tour);
     $this->set('total_member', $totalMember);
