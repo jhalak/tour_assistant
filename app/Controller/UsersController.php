@@ -11,6 +11,13 @@ class UsersController extends AppController {
     parent::beforeFilter();
     $this->Auth->allow('add'); // Letting users register themselves
     $this->Auth->deny('edit', 'delete', 'view');
+    $this->sanityCheckViewOrChangeOtherUserInfo();
+  }
+
+  public function sanityCheckViewOrChangeOtherUserInfo() {
+    if (!empty($this->request->params['pass'][0])) {
+      parent::sanityCheckViewOrChangeOtherUserInfo($this->request->params['pass'][0]);
+    }
   }
 
   public function login() {

@@ -9,7 +9,17 @@ class CostsController extends AppController {
   
   public function beforeFilter(){
     parent::assertTourExists();
+    $this->sanityCheckViewOrChangeOtherUserInfo();
   }
+
+  public function sanityCheckViewOrChangeOtherUserInfo(){
+    if (!empty($this->request->params['pass'][0])){
+      $costId = $this->request->params['pass'][0];
+      $cost = $this->Cost->findById($costId);
+      $this->sanityCheckViewOrChangeOtherUserInfoFromTid($cost['Cost']['tour_id']);
+    }
+  }
+
 /**
  * index method
  *

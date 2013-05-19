@@ -1,4 +1,4 @@
-<?php echo $this->Session->flash('auth'); ?>
+<?php echo $this->Session->flash(); ?>
 <?php echo $this->Form->create('User', array('class' => 'form-horizontal')); ?>
     <div class="control-group">
       <div class="controls">

@@ -43,14 +43,9 @@ class AppController extends Controller {
   );
 
   public function beforeFilter(){
-    $this->Auth->allow('index', 'view');
     if (!empty($this->request->params['tid'])) {
       $tid = $this->request->params['tid'];
-      
-      $this->loadModel('Tour');
-      $options = array('conditions' => array('Tour.' . $this->Tour->primaryKey => $tid));
-      $tour = $this->Tour->find('first', $options);
-      
+      $tour = $this->getTourInfoFromTid($tid);
       $this->set('tid', $tid);
       $this->set('tour', $tour);
     }
@@ -74,5 +69,41 @@ class AppController extends Controller {
     }else {
       self::beforeFilter();
     }
+  }
+
+  public function accessDenied(){
+    $this->Session->setFlash(__('Access denied'), 'flash/error');
+    $this->redirect($this->Auth->redirectUrl());
+  }
+
+  public function getTourInfoFromTid($tid){
+    $this->loadModel('Tour');
+    $options = array('conditions' => array('Tour.' . $this->Tour->primaryKey => $tid));
+    return $this->Tour->find('first', $options);
+  }
+
+  public function sanityCheckViewOrChangeOtherUserInfo($uid){
+    $currentUser = $this->getCurrentUser();
+    if ($uid != $currentUser['id']) {
+      $this->accessDenied();
+    }
+  }
+
+  public function sanityCheckViewOrChangeOtherUserInfoFromTid($tid){
+    $tour = $this->getTourInfoFromTid($tid);
+    if (empty($tour)) {
+      $this->accessDenied();
+    }
+    $currentUser = $this->getCurrentUser();
+    if ($tour['Tour']['user_id'] != $currentUser['id']) {
+      $this->accessDenied();
+    }
+  }
+
+  public function getCurrentUser() {
+    App::uses('CakeSession', 'Model/Datasource');
+    $session = new CakeSession();
+    return $session->read('Auth.User');
+
   }
 }

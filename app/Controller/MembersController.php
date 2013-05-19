@@ -7,6 +7,20 @@ App::uses('AppController', 'Controller');
  */
 class MembersController extends AppController {
 
+  public function beforeFilter(){
+    parent::beforeFilter();
+    $this->sanityCheckViewOrChangeOtherUserInfo();
+  }
+
+  public function sanityCheckViewOrChangeOtherUserInfo(){
+    if (!empty($this->request->params['pass'][0])){
+      $member = $this->Member->findById($this->request->params['pass'][0]);
+      if (empty($member)) {
+        $this->accessDenied();
+      }
+    }
+  }
+
 	public function all() {
 		$this->Member->recursive = 0;
 		$this->set('members', $this->paginate());

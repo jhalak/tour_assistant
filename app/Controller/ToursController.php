@@ -6,19 +6,23 @@ App::uses('AppController', 'Controller');
  * @property Tour $Tour
  */
 class ToursController extends AppController {
-  
+
   public function beforeFilter() {
     parent::beforeFilter();
     if (!empty($this->request->params['pass'])) {
-      $this->set('tid', $this->request->params['pass'][0]);
+      $tid = $this->request->params['pass'][0];
+      $this->sanityCheckViewOrChangeOtherUserInfo($tid);
+      $this->set('tid', $tid);
     }
-  } 
+  }
 
-/**
- * index method
- *
- * @return void
- */
+  public function sanityCheckViewOrChangeOtherUserInfo($tid){
+    $tour = $this->getTourInfoFromTid($tid);
+    if (empty($tour)){
+      $this->accessDenied();
+    }
+  }
+
 	public function index() {
 		$this->Tour->recursive = 0;
 		$this->set('tours', $this->paginate());

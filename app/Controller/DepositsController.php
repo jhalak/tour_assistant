@@ -9,7 +9,17 @@ class DepositsController extends AppController {
   
   public function beforeFilter(){
     parent::assertTourExists();
+    $this->sanityCheckViewOrChangeOtherUserInfo();
   }
+
+  public function sanityCheckViewOrChangeOtherUserInfo(){
+    if (!empty($this->request->params['pass'][0])){
+      $depositId = $this->request->params['pass'][0];
+      $cost = $this->Deposit->findById($depositId);
+      $this->sanityCheckViewOrChangeOtherUserInfoFromTid($cost['Deposit']['tour_id']);
+    }
+  }
+
 /**
  * index method
  *
