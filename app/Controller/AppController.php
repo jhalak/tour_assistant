@@ -53,6 +53,7 @@ class AppController extends Controller {
     $this->set('auth', $this->Auth);
     $this->set('sql_debug', $this->sqlDebug);
     $this->set('user_is_admin', $this->userIsAdmin());
+    $this->set('left_sidebar', $this->Auth->loggedIn());
   }
   
   public function redirect($url) {

@@ -37,6 +37,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
   echo $this->Html->css('bootstrap-responsive.min');
   echo $this->Html->css('core');
 
+  echo $this->Html->css('stylesheets/screen');
+
+  echo $this->Html->css(array("http://fonts.googleapis.com/css?family=Domine|Life+Savers|Elsie+Swash+Caps:400,900"));
+
   echo $this->fetch('css');
 
   echo $this->Html->script('libs/jquery');
@@ -48,7 +52,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 <body>
 
-<div id="main-container">
+<div id="main-container" class="container">
 
   <div id="header" class="container">
     <?php echo $this->element('menu/top_menu'); ?>
@@ -58,21 +62,21 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
   <div id="content" class="container">
     <div id="page-container" class="row-fluid">
 
+      <?php if ($left_sidebar):?>
       <div id="sidebar" class="span3">
-        <?php if ($auth->loggedIn()):?>
         <div class="actions well">
           <ul class="nav nav-list">
             <?php echo $this->element('leftnav'); ?>
           </ul>
           <!-- .nav nav-list bs-docs-sidenav -->
-          <?php endif;?>
         </div>
-        <!-- .actions -->
-
       </div>
+      <?php endif;?>
       <!-- #sidebar .span3 -->
 
-      <div id="page-content" class="span9">
+      <?php $class = $left_sidebar ? 'span9 has-left-sidebar' : 'container'; ?>
+
+      <div id="page-content" class="<?php echo $class;?>">
         <?php if (CakeSession::check('Message.')): ?>
           <div class="alert">
             <?php echo $this->Session->flash(); ?>

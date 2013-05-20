@@ -154,9 +154,4 @@ class User extends AppModel {
     ));
     return $count == 0;
   }
-
-  public function afterDelete(){
-    parent::afterDelete();
-    //$this->User->Tour->delete();
-  }
 }

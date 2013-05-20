@@ -9,8 +9,8 @@ class UsersController extends AppController {
 
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('add'); // Letting users register themselves
-    $this->Auth->deny('edit', 'delete', 'view');
+    $this->Auth->allow('register'); // Letting users register themselves
+    $this->Auth->deny('add', 'edit', 'delete', 'view');
     $this->sanityCheckViewOrChangeOtherUserInfo();
   }
 
@@ -68,6 +68,21 @@ class UsersController extends AppController {
  * @return void
  */
 	public function add() {
+		if ($this->request->is('post')) {
+			$this->User->create();
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('Registration complete. Please login to continue.'), 'flash/success');
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'), 'flash/error');
+			}
+		}
+		$groups = $this->User->Group->find('list');
+    $this->set('action', 'add');
+		$this->set(compact('groups'));
+	}
+
+  public function register() {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
