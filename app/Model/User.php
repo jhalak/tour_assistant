@@ -112,7 +112,7 @@ class User extends AppModel {
 		'Member' => array(
 			'className' => 'Member',
 			'foreignKey' => 'user_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -125,7 +125,7 @@ class User extends AppModel {
 		'Tour' => array(
 			'className' => 'Tour',
 			'foreignKey' => 'user_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -153,5 +153,10 @@ class User extends AppModel {
       'conditions' => array($field => $value[$field]),
     ));
     return $count == 0;
+  }
+
+  public function afterDelete(){
+    parent::afterDelete();
+    //$this->User->Tour->delete();
   }
 }

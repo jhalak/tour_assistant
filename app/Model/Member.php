@@ -63,7 +63,9 @@ class Member extends AppModel {
 	);
 	
 	public function beforeFind($queryData) {
-	  $queryData['conditions'][] = array('Member.user_id' => $this->getLoggedInUid());
+    if (!$this->isAdmin()){
+      $queryData['conditions'][] = array('Member.user_id' => $this->getLoggedInUid());
+    }
 	  return $queryData;
 	}
 

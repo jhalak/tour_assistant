@@ -23,7 +23,6 @@ class UsersController extends AppController {
   public function login() {
     if ($this->request->is('post')){
       if ($this->Auth->login()){
-        //CoreUtils::dumpAndExit($this->Auth->redirectUrl());
         $this->redirect($this->Auth->redirectUrl());
       }else {
         $this->Session->setFlash(__('Invalid username or password'), 'flash/error');
@@ -72,13 +71,14 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved'), 'flash/success');
+				$this->Session->setFlash(__('Registration complete. Please login to continue.'), 'flash/success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'), 'flash/error');
 			}
 		}
 		$groups = $this->User->Group->find('list');
+    $this->set('action', 'add');
 		$this->set(compact('groups'));
 	}
 

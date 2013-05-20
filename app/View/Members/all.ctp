@@ -3,18 +3,12 @@
 	<?php echo $this->TaHtml->themeAddLink(__('Add member'), array('action' => 'add')); ?>
 	<table cellpadding="0" cellspacing="0" class="table table-striped table-bordered">
 		<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 		</tr>
 	  <?php foreach ($members as $member): ?>
   	<tr>
-  		<td><?php echo h($member['Member']['id']); ?>&nbsp;</td>
   		<td><?php echo h($member['Member']['name']); ?>&nbsp;</td>
-  		<td>
-  			<?php echo $this->Html->link($member['User']['name'], array('controller' => 'users', 'action' => 'view', $member['User']['id'])); ?>
-  		</td>
   		<td class="actions">
   			<?php echo $this->Html->link(__('View'), array('action' => 'view', $member['Member']['id']), array('class' => 'btn btn-mini')); ?>
   			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $member['Member']['id']), array('class' => 'btn btn-mini')); ?>

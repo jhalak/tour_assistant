@@ -131,7 +131,7 @@ class ToursController extends AppController {
     $tour = $this->Tour->findById($tid);
     $totalMember = count($tour['Member']);
     $totalCost = $costs[0]['total'];
-    $perHeadCost = $totalCost / $totalMember;
+    $perHeadCost = $totalMember == 0 ? 0 : $totalCost / $totalMember;
 
     $deposits = $this->Tour->getAllMembers($tid);
 

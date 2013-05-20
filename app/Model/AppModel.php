@@ -39,7 +39,6 @@ class AppModel extends Model {
   }
   public function getLoggedInUid() {
     $user = AuthComponent::user();
-    //CoreUtils::dumpAndExit($user);
     if (!empty($user['id'])) {
       return $user['id'];
     }

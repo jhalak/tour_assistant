@@ -18,90 +18,97 @@
 
 $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-	<head>
-		<?php echo $this->Html->charset(); ?>
-		<title>
-			<?php echo $cakeDescription ?>:
-			<?php echo $title_for_layout; ?>
-		</title>
-		<?php
-			echo $this->Html->meta('icon');
-			
-			echo $this->fetch('meta');
+<head>
+  <?php echo $this->Html->charset(); ?>
+  <title>
+    <?php echo __('Tour Assistant'); ?>:
+    <?php echo $title_for_layout; ?>
+  </title>
+  <?php
+  echo $this->Html->meta('icon');
 
-			echo $this->Html->css('bootstrap.min');
-			echo $this->Html->css('bootstrap-responsive.min');
-			echo $this->Html->css('core');
+  echo $this->fetch('meta');
 
-			echo $this->fetch('css');
-			
-			echo $this->Html->script('libs/jquery');
-			echo $this->Html->script('libs/bootstrap.min');
-			
-			echo $this->fetch('script');
-		?>
-	</head>
+  echo $this->Html->css('bootstrap.min');
+  echo $this->Html->css('bootstrap-responsive.min');
+  echo $this->Html->css('core');
 
-	<body>
+  echo $this->fetch('css');
 
-		<div id="main-container">
+  echo $this->Html->script('libs/jquery');
+  echo $this->Html->script('libs/bootstrap.min');
 
-			<div id="header" class="container">
-				<?php echo $this->element('menu/top_menu'); ?>
-			</div><!-- #header .container -->
+  echo $this->fetch('script');
+  ?>
+</head>
 
-			<div id="content" class="container">
-  			<div id="page-container" class="row-fluid">
+<body>
 
-  				<div id="sidebar" class="span3">
-            <?php if ($auth->loggedIn()):?>
-  					<div class="actions well">
-  						<ul class="nav nav-list">
-  							<?php echo $this->element('leftnav'); ?>
-  						</ul>
-  						<!-- .nav nav-list bs-docs-sidenav -->
-            <?php endif;?>
-  					</div>
-  					<!-- .actions -->
-  
-  				</div><!-- #sidebar .span3 -->
-  
-  					<div id="page-content" class="span9">
-              <?php if (CakeSession::check('Message.')): ?>
-                <div class="alert">
-					        <?php echo $this->Session->flash(); ?>
-                </div>
-					    <?php endif;?>
-				      <?php echo $this->fetch('content'); ?>
-						</div><!-- #page-content .span9 -->
+<div id="main-container">
 
-				</div><!-- #page-container .row-fluid -->
-					
+  <div id="header" class="container">
+    <?php echo $this->element('menu/top_menu'); ?>
+  </div>
+  <!-- #header .container -->
+
+  <div id="content" class="container">
+    <div id="page-container" class="row-fluid">
+
+      <div id="sidebar" class="span3">
+        <?php if ($auth->loggedIn()):?>
+        <div class="actions well">
+          <ul class="nav nav-list">
+            <?php echo $this->element('leftnav'); ?>
+          </ul>
+          <!-- .nav nav-list bs-docs-sidenav -->
+          <?php endif;?>
+        </div>
+        <!-- .actions -->
+
+      </div>
+      <!-- #sidebar .span3 -->
+
+      <div id="page-content" class="span9">
+        <?php if (CakeSession::check('Message.')): ?>
+          <div class="alert">
+            <?php echo $this->Session->flash(); ?>
+          </div>
+        <?php endif;?>
+        <?php echo $this->fetch('content'); ?>
+      </div>
+      <!-- #page-content .span9 -->
+
+    </div>
+    <!-- #page-container .row-fluid -->
 
 
-				</div>
-				<!-- #header .container -->
+  </div>
+  <!-- #header .container -->
 
-				<div id="footer" class="container">
-					
-					
-				<?php //Silence is golden ?>
-				</div>
-				<!-- #footer .container -->
+  <div id="footer" class="container">
 
-			</div>
-			<!-- #main-container -->
-			<div class="container">
-                       <div class="well">
-                               <small>
-                                       <?php echo $this->element('sql_dump'); ?>
-                               </small>
-                      </div>
-          </div><!-- .container -->
-			
-	</body>
+
+    <?php //Silence is golden ?>
+  </div>
+  <!-- #footer .container -->
+
+</div>
+<!-- #main-container -->
+<?php if ($sql_debug): ?>
+<div class="container">
+  <div class="well">
+    <small>
+      <?php echo $this->element('sql_dump'); ?>
+    </small>
+  </div>
+</div>
+<?php endif; ?>
+<!-- .container -->
+
+</body>
 
 </html>

@@ -3,20 +3,20 @@
 	<?php echo $this->TaHtml->themeAddLink(__('Add tour'), array('action' => 'add')); ?>
 	<table cellpadding="0" cellspacing="0" class="table table-striped table-bordered">
 		<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('description'); ?></th>
+      <?php if ($user_is_admin): ?>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
+      <?php endif; ?>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 		</tr>
 		<?php	foreach ($tours as $tour): ?>
 		<tr>
-  		<td><?php echo h($tour['Tour']['id']); ?>&nbsp;</td>
   		<td><?php echo h($tour['Tour']['name']); ?>&nbsp;</td>
-  		<td><?php echo h($tour['Tour']['description']); ?>&nbsp;</td>
+      <?php if ($user_is_admin): ?>
   		<td>
   			<?php echo $this->Html->link($tour['User']['name'], array('controller' => 'users', 'action' => 'view', $tour['User']['id'])); ?>
   		</td>
+      <?php endif; ?>
   		<td class="actions">
   			<?php echo $this->Html->link(__('View'), array('action' => 'view', $tour['Tour']['id']), array('class' => 'btn btn-mini')); ?>
   			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $tour['Tour']['id']), array('class' => 'btn btn-mini')); ?>

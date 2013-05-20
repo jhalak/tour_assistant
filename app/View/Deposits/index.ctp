@@ -4,28 +4,16 @@
 	<table cellpadding="0" cellspacing="0"
 		class="table table-striped table-bordered">
 		<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('amount'); ?></th>
-			<th><?php echo $this->Paginator->sort('description'); ?></th>
-			<th><?php echo $this->Paginator->sort('tour_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('member_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 		</tr>
 		<?php foreach ($deposits as $deposit): ?>
   	<tr>
-  		<td><?php echo h($deposit['Deposit']['id']); ?>&nbsp;</td>
   		<td><?php echo h($deposit['Deposit']['amount']); ?>&nbsp;</td>
-  		<td><?php echo h($deposit['Deposit']['description']); ?>&nbsp;</td>
-  		<td>
-  			<?php echo $this->Html->link($deposit['Tour']['name'], array('controller' => 'tours', 'action' => 'view', $deposit['Tour']['id'])); ?>
-  		</td>
   		<td>
   			<?php echo $this->Html->link($deposit['Member']['name'], array('controller' => 'members', 'action' => 'view', $deposit['Member']['id'])); ?>
   		</td>
-  		<td><?php echo h($deposit['Deposit']['created']); ?>&nbsp;</td>
-  		<td><?php echo h($deposit['Deposit']['modified']); ?>&nbsp;</td>
   		<td class="actions">
   			<?php echo $this->TaHtml->tourLink($tid, __('View'), array('action' => 'view', $deposit['Deposit']['id']), array('class' => 'btn btn-mini')); ?>
   			<?php echo $this->TaHtml->tourLink($tid, __('Edit'), array('action' => 'edit', $deposit['Deposit']['id']), array('class' => 'btn btn-mini')); ?>

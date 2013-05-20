@@ -24,7 +24,7 @@
 		<div class="control-group hidden">
 		<?php echo $this->Form->label('Tour', 'Tour', array('class' => 'control-label'));?>
 			<div class="controls">
-			<?php echo $this->Form->input('Tour', array('default' => $tid));?>
+			<?php echo $this->Form->input('Tour', array('default' => !empty($tid) ? $tid : NULL));?>
 			</div>
 			<!-- .controls -->
 		</div>

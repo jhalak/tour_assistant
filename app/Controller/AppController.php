@@ -33,6 +33,7 @@ App::import('Vendor', 'Utils/CoreUtils');
  */
 class AppController extends Controller {
   public $theme = "Cakestrap";
+  public $sqlDebug = false;
 
   public $components = array(
     'Session',
@@ -50,6 +51,8 @@ class AppController extends Controller {
       $this->set('tour', $tour);
     }
     $this->set('auth', $this->Auth);
+    $this->set('sql_debug', $this->sqlDebug);
+    $this->set('user_is_admin', $this->userIsAdmin());
   }
   
   public function redirect($url) {
@@ -83,6 +86,10 @@ class AppController extends Controller {
   }
 
   public function sanityCheckViewOrChangeOtherUserInfo($uid){
+    // don't stop ADMIN
+    if ($this->userIsAdmin()) {
+      return;
+    }
     $currentUser = $this->getCurrentUser();
     if ($uid != $currentUser['id']) {
       $this->accessDenied();
@@ -101,9 +108,11 @@ class AppController extends Controller {
   }
 
   public function getCurrentUser() {
-    App::uses('CakeSession', 'Model/Datasource');
-    $session = new CakeSession();
-    return $session->read('Auth.User');
+    return $this->Auth->user();
+  }
 
+  public function userIsAdmin(){
+    $user = $this->getCurrentUser();
+    return $user['Group']['id'] == 1;
   }
 }
