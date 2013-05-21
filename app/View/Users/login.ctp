@@ -1,7 +1,7 @@
 <div class="login-container row">
   <div class="span6 offset1">
     <h3>
-      <?php echo __("Wanna make your tour cost calculation automated?"); ?>
+      <?php echo __("Wanna make your TOUR cost calculation automated?"); ?>
       <?php echo $this->Html->link(__('Join'), array('controller' => 'users', 'action' => 'register')); ?>
       <?php echo __("OR LogIn here -------->"); ?>
     </h3>
@@ -9,7 +9,7 @@
   <div class="span4 login-form clearfix">
   <?php echo $this->Session->flash(); ?>
     <h2><?php echo __("Login"); ?></h2>
-  <?php echo $this->Form->create('User', array('class' => 'form-horizontal')); ?>
+    <?php echo $this->Form->create('User', array('class' => 'form-horizontal')); ?>
       <div class="control-group">
         <div class="controls">
           <?php echo $this->Form->input('username', array('class' => '')); ?>

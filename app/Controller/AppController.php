@@ -116,4 +116,10 @@ class AppController extends Controller {
     $user = $this->getCurrentUser();
     return $user['Group']['id'] == 1;
   }
+
+  public function sanityCheckForAdminUser(){
+    if (!$this->userIsAdmin()) {
+      $this->accessDenied();
+    }
+  }
 }

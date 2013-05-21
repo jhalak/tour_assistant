@@ -15,12 +15,13 @@
 					<li><?php echo $this->Html->link(__('My members'), array('controller' => 'members', 'action' => 'index')); ?> </li>
           <?php if ($user_is_admin): ?>
           <li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+          <li><?php echo $this->Html->link(__('Groups'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
           <li><?php echo $this->Html->link(__('Members'), array('controller' => 'members', 'action' => 'index')); ?> </li>
           <?php endif; ?>
 				</ul>
         <ul class="nav pull-right">
           <?php $user = $auth->user(); ?>
-          <li><?php echo $this->Html->link($user['name'], array('controller' => 'users', 'action' => 'view', $user['id'])); ?> </li>
+          <li><?php echo $this->Html->link('Howdy, <i class="icon-user"></i>' . $user['name'], array('controller' => 'users', 'action' => 'view', $user['id']), array('class' => '', 'escape' => false)); ?> </li>
           <li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')); ?> </li>
         </ul>
 			</div>

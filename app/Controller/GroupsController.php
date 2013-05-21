@@ -7,6 +7,11 @@ App::uses('AppController', 'Controller');
  */
 class GroupsController extends AppController {
 
+  public function beforeFilter() {
+    parent::beforeFilter();
+    $this->Auth->deny('add', 'edit', 'delete', 'view');
+    $this->sanityCheckForAdminUser();
+  }
 /**
  * index method
  *

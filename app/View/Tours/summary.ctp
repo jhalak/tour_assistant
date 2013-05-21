@@ -1,5 +1,5 @@
 <div class="summary">
-  <h1><?php echo __('Summary'); ?></h1>
+  <h2><?php echo __('Summary'); ?></h2>
   <dl>
     <dt><?php echo $this->TaHtml->themeLabelValue('Total cost', $total_cost); ?></dt>
     <dt><?php echo $this->TaHtml->themeLabelValue('Total deposit', $total_deposit); ?></dt>

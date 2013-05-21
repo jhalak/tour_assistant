@@ -1,5 +1,5 @@
 <?php if (!empty($tid)): ?>
-	<li class="nav-header"><?php echo $tour['Tour']['name'] . ' ' . __('Tour')?></li>
+	<li class="nav-header"><?php echo $this->Html->link('<i class="icon-circle-arrow-down"></i> ' . h($tour['Tour']['name']) . ' ' . __('Tour'), array('controller' => 'tours', 'action' => 'view', $tour['Tour']['id']), array('class' => 'tour-name', 'escape' => false)); ?></li>
   <li><?php echo $this->TaHtml->tourLink($tid, __('Members'),  array('controller' => 'members', 'action' => 'index')); ?></li>
   <li><?php echo $this->TaHtml->tourLink($tid, __('Costs'),    array('controller' => 'costs', 'action' => 'index')); ?> </li>
   <li><?php echo $this->TaHtml->tourLink($tid, __('Deposits'), array('controller' => 'deposits', 'action' => 'index')); ?> </li>

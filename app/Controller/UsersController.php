@@ -7,6 +7,11 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+  public function beforeRender(){
+    parent::beforeRender();
+    //CoreUtils::dump($this->request->params);
+  }
+
   public function beforeFilter() {
     parent::beforeFilter();
     $this->Auth->allow('register'); // Letting users register themselves

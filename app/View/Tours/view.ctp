@@ -1,11 +1,6 @@
 <div class="tours view">
-	<h2><?php  echo __('Tour'); ?></h2>
+	<h2><?php  echo __('Tour details'); ?></h2>
 	<table class="table table-striped table-bordered">
-		<tr>
-			<td><strong><?php echo __('Id'); ?> </strong></td>
-			<td>
-			<?php echo h($tour['Tour']['id']); ?> &nbsp;</td>
-		</tr>
 		<tr>
 			<td><strong><?php echo __('Name'); ?> </strong></td>
 			<td>

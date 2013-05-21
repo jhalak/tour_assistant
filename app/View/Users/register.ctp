@@ -1,7 +1,7 @@
 <div class="register-container row">
   <div class="span4 offset1">
     <h3>
-      <?php echo __("You are just ONE step behind of making your tour with NO WORRIES?"); ?>
+      <?php echo __("You are just ONE step behind of making your TOURS \"hakuna mutata\" (no worries)"); ?>
       <?php echo $this->Html->link(__('Login'), array('controller' => 'users', 'action' => 'add')); ?>
       <?php echo __("OR Join here ----->"); ?>
     </h3>

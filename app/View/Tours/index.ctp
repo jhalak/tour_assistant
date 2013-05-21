@@ -11,7 +11,7 @@
 		</tr>
 		<?php	foreach ($tours as $tour): ?>
 		<tr>
-  		<td><?php echo h($tour['Tour']['name']); ?>&nbsp;</td>
+  		<td><?php echo $this->Html->link(h($tour['Tour']['name']), array('controller' => 'tours', 'action' => 'view', $tour['Tour']['id'])); ?></td>
       <?php if ($user_is_admin): ?>
   		<td>
   			<?php echo $this->Html->link($tour['User']['name'], array('controller' => 'users', 'action' => 'view', $tour['User']['id'])); ?>

@@ -1,6 +1,6 @@
 <div class="users view">
 
-  <h2><?php  echo __('User'); ?></h2>
+  <h2><?php  echo __('User details'); ?></h2>
   <div class="pull-right">
     <?php echo $this->Html->link('<i class="icon-edit icon-black"></i> ' . __('Edit'), '/users/edit/' . $user['User']['id'] , array('class' => 'btn btn-success', 'escape' => false)); ?>
     <br><br>
