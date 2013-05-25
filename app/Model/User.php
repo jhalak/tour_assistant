@@ -154,4 +154,19 @@ class User extends AppModel {
     ));
     return $count == 0;
   }
+
+  public function afterSave($created){
+    if ($created){
+      $this->Member->create(array(
+        'created' => $this->data['User']['created'],
+        'modified' => $this->data['User']['modified'],
+      ));
+      $this->Member->save(
+        array(
+          'name' => $this->data['User']['name'],
+          'user_id' => $this->data['User']['id'],
+        )
+      );
+    }
+  }
 }

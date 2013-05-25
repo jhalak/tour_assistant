@@ -39,4 +39,13 @@ class Deposit extends AppModel {
 			'order' => ''
 		)
 	);
+
+  public $validate = array(
+    'amount' => array(
+      'notempty' => array(
+        'rule' => array('notempty'),
+        'message' => 'Amount can\'t be empty',
+      ),
+    ),
+  );
 }

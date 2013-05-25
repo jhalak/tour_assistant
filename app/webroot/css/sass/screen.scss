@@ -37,6 +37,10 @@ body{
   }
 }
 
+#header{
+  margin-top: 0;
+}
+
 #page-container{
   #page-content{
     @extend .block;
