@@ -73,4 +73,13 @@ class Tour extends AppModel {
     );
     return $res;
   }
+
+  public $validate = array(
+    'name' => array(
+      'notempty' => array(
+        'rule' => 'notempty',
+        'message' => 'You must enter a tour name'
+      ),
+    ),
+  );
 }

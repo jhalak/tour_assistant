@@ -20,7 +20,14 @@ class Member extends AppModel {
  *
  * @var array
  */
-	public $validate = array();
+  public $validate = array(
+    'name' => array(
+      'notempty' => array(
+        'rule' => 'notempty',
+        'message' => 'You must enter a member name'
+      ),
+    ),
+  );
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
